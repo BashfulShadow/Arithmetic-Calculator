@@ -1,37 +1,60 @@
-3 + 3
-6.0
-2 + 3 * 4
-14.0
-(2 + 3) * 4
-20.0
-2^3
-8.0
-(2 + 3) * (5 - 2) ^ 2 / 2
-22.5
-3 > 2
-1.0
-3 < 2
-0.0
-3 >= 3
-1.0
-3 <= 4
-1.0
-3 == 3
-1.0
-3 != 4
-1.0
-Division by 0 error
-((2 + 3) * (5 - 2)) / (1 + 1)
-7.5
-(3 + 5) * 2 ^ 3 - 6 / 2 >= 20
-1.0
-1 + 1 == 2 != 3 > 2
-0.0
-3 + 4 * 2 / (1 - 5) ^ 2 ^ 3 == 3
-0.0
--3 + 4 * -2
--11.0
-5
-5.0
-Invalid operator or missing operator
-Invalid operator or missing operator
+Expression: 3 + 3
+Result: 6.0
+Expression: 2 + 3 * 4
+Result: 14.0
+Expression: (2 + 3) * 4
+Result: 20.0
+Expression: 2^3
+Result: 8.0
+Expression: (2 + 3) * (5 - 2) ^ 2 / 2
+Result: 22.5
+Expression: 3 > 2
+Result: 1.0
+Expression: 3 < 2
+Result: 0.0
+Expression: 3 >= 3
+Result: 1.0
+Expression: 3 <= 4
+Result: 1.0
+Expression: 3 == 3
+Result: 1.0
+Expression: 3 != 4
+Result: 1.0
+Expression: 2 / 0
+Result: Division by 0 error
+Expression: ((2 + 3) * (5 - 2)) / (1 + 1)
+Result: 7.5
+Expression: (3 + 5) * 2 ^ 3 - 6 / 2 >= 20
+Result: 1.0
+Expression: 1 + 1 == 2 != 3 > 2
+Result: 0.0
+Expression: 3 + 4 * 2 / (1 - 5) ^ 2 ^ 3 == 3
+Result: 0.0
+Expression: -3 + 4 * -2
+Result: -11.0
+Expression: 5
+Result: 5.0
+Expression: 
+Result: Invalid or missing operator
+Expression: 3 +* 4
+Result: Invalid or missing operator
+Expression: 5 + 11 * 2 / (34 - 5) ^ 2 ^ 3
+Result: 5.000000036985773
+Expression: 2.4 / (3.8 * 9.87)
+Result: 0.06398976163813791
+Expression: 3483.4 - -43.568
+Result: 3526.9680000000003
+Expression: 35 * 22 + 0.15 / 0.25
+Result: 770.6
+Expression: 325.08889 * 745.12345 / 26
+Result: 9316.590587441173
+Expression: 34^2 / 34 + 56 * 22.3^2
+Result: 27882.24
+Expression: 498 - 79 +*-/ 496
+Result: Invalid or missing operator
+Expression: 79 + -78.5
+Result: 0.5
+Expression: 5 / 5
+Result: 1.0
+Expression: 7 + 5 * 75 - 8 / 4 + 9.3
+Result: 389.3

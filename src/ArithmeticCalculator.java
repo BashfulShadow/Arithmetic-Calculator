@@ -1,13 +1,18 @@
 public class ArithmeticCalculator {
+    //stack for the numbers
     private CustomStack<Double> numStack = new CustomStack<>();
+    //stack for the operators
     private CustomStack<String> operatorStack = new CustomStack<>();
 
     public double evaluateExpression(String expression) {
+
+        //read expression character by character
         for (int i = 0; i < expression.length(); i++) {
             char ch = expression.charAt(i);
 
             if (Character.isWhitespace(ch)) continue;
 
+            //if the character is a digit, check to see if it is a multi digit number or a decimal number, then add it to the stack
             if (Character.isDigit(ch)) {
                 int j = i;
                 while (j < expression.length() && (Character.isDigit(expression.charAt(j)) || expression.charAt(j) == '.')) {
@@ -17,6 +22,8 @@ public class ArithmeticCalculator {
                 numStack.push(num);
                 i = j - 1;
             }
+
+            //if the character is a minus, check to see if the following character is a digit, and if it is then make it a negative number and add it to the stack
             else if ((String.valueOf(ch).equals("-") && Character.isDigit(expression.charAt(i+1)))){
                 int j = i+1;
                 while (j < expression.length() && (Character.isDigit(expression.charAt(j)) || expression.charAt(j) == '.')) {
@@ -30,6 +37,8 @@ public class ArithmeticCalculator {
                 operatorStack.push(String.valueOf(ch));
             }
             else if (ch == ')') {
+
+                //process the operators that were inside the parentheses
                 while (!operatorStack.isEmpty() && !operatorStack.peek().equals("(")) {
                     processAnOperator();
                 }
@@ -38,7 +47,7 @@ public class ArithmeticCalculator {
             else if (isOperator(ch)) {
                 String operator = String.valueOf(ch);
 
-                // Check for multi-character operators
+                //check for multi-character operators
                 if (i + 1 < expression.length()) {
                     char nextCh = expression.charAt(i + 1);
                     if ((ch == '>' && nextCh == '=') || (ch == '<' && nextCh == '=') ||
@@ -48,6 +57,7 @@ public class ArithmeticCalculator {
                     }
                 }
 
+                //process operators of higher priority
                 while (!operatorStack.isEmpty() && !operatorStack.peek().equals("(") &&
                         prio(operator) >= prio(operatorStack.peek()) && numStack.size() >= 2) {
                     processAnOperator();
@@ -56,12 +66,17 @@ public class ArithmeticCalculator {
             }
         }
 
-        while (!operatorStack.isEmpty()) {
-            //System.out.println(operatorStack.peek());
-            //System.out.println(numStack.peek());
+        while (!operatorStack.isEmpty() && numStack.size() >= 2) {
             processAnOperator();
         }
-        if (numStack.isEmpty()){
+
+        //checking for invalid number of operators
+        if (numStack.isEmpty() || !operatorStack.isEmpty()){
+
+            //get rid of anymore invalid operators left in the stack before throwing the error
+            while (!operatorStack.isEmpty()){
+                operatorStack.pop();
+            }
             throw new IllegalStateException("Stack is empty");
         }
 
@@ -69,16 +84,11 @@ public class ArithmeticCalculator {
     }
 
     private void processAnOperator() {
-        //System.out.println(operatorStack.peek());
-        //System.out.println(numStack.peek());
         String operator = operatorStack.pop();
-        if (!operatorStack.isEmpty() && prio(operator) <= prio(operatorStack.peek())){
-
-        }
         double num2 = numStack.pop();
         double num1 = numStack.pop();
-        //System.out.println(num1 + operator + num2);
 
+        //switch statement for various operator cases
         switch (operator) {
             case "^":
                 numStack.push(Math.pow(num1, num2));
@@ -119,11 +129,13 @@ public class ArithmeticCalculator {
         }
     }
 
+    //check if a character is an accepted operator
     private boolean isOperator(char ch) {
         return ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '^' ||
                 ch == '>' || ch == '<' || ch == '=' || ch == '!';
     }
 
+    //check priority of operators
     private int prio(String operator) {
         switch (operator) {
             case "^":
